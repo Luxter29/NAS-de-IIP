@@ -1,0 +1,52 @@
+package sample;
+import java.util.*;
+
+public class NAS_1_ej1 {
+    private static void area_equilatero(double altura){
+        double area = Math.sqrt(3)/4 * (Math.pow(altura, 2));
+        System.out.println(area);
+    }
+    private static void area_isosceles(double cateto, double base){
+        double altura = Math.sqrt(Math.pow(cateto, 2) - ((Math.pow(base, 2))/4));
+        double area = (base*altura)/2;
+        System.out.println(area);
+    }
+    private static void area_escaleno_heron(double hipotenusa, double cateto1, double cateto2){
+        double semiperimetro = (cateto1 + cateto2 + hipotenusa)/2;
+        double area = Math.sqrt(semiperimetro*(semiperimetro-cateto1)*(semiperimetro-cateto2)*(semiperimetro-hipotenusa));
+        System.out.println(area);
+    }
+    private static void area_triangulo_general(double base, double altura){
+        double area = (base*altura)/2;
+        System.out.println(area);
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("¿De qué tipo es el triángulo del cual quieres saber el área?");
+        Scanner sc = new Scanner(System.in);
+        String str =sc.nextLine();
+        str.toLowerCase();
+
+        switch (str){
+            case "equilatero":
+                System.out.println("Introduce su altura:");
+                area_equilatero(sc.nextDouble());
+                break;
+
+            case "isosceles":
+                System.out.println("Introduce su altura y su base:");
+                area_isosceles(sc.nextDouble(), sc.nextDouble());
+                break;
+
+            case "escaleno":
+                System.out.println("Introduce su hipotenusa y sus dos catetos:");
+                area_escaleno_heron(sc.nextDouble(), sc.nextDouble(), sc.nextDouble());
+                break;
+
+            case "rectangulo":
+                System.out.println("Introduce su base y su altura");
+                area_triangulo_general(sc.nextDouble(), sc.nextDouble());
+                break;
+        }
+    }
+}
