@@ -1,0 +1,85 @@
+package AsicoderCompany.SA.NAS;
+import java.util.*;
+public class NAS_1_ej1 {
+/**
+ *  Ejercicio NAS 1 - Clase Programa
+ * @author Serrano Aramburu Asier  1C2       ||       Arroyo Linuesa Luis     1C1      ||      Giménez Devís Cristóbal 1C1
+ */
+    /** Metodo static que devuelve el area de un triangulo equilatero
+     * @param altura  Variable de tipo double que almacena el valor de la altura
+     * @return area  Muestra por pantalla el area del triangulo equilatero
+     */
+    public static void area_equilatero(double altura) {
+        double area = Math.sqrt(3)/4 * (Math.pow(altura, 2));
+        if((area == Math.floor(area)) && !Double.isInfinite(area)){
+            System.out.println("Area del triangulo equilatero: " + (int)area);
+        }else{
+            System.out.println("Area del triangulo equilatero: " + area);
+        }
+    }
+    /** Metodo static que devuelve el area de un triangulo equilatero
+     * @param cateto  Variable de tipo double que almacena el valor del cateto introducido
+     * @param base  Variable de tipo double que almacena el valor de la base del trangulo
+     * @return area  Muestra por pantalla el area del triangulo isosceles
+     */
+    public static void area_isosceles(double cateto, double base) {
+        double altura = Math.sqrt(Math.pow(cateto, 2) - ((Math.pow(base, 2))/4));
+        double area = (base*altura)/2;
+        System.out.println("Area del triangulo isosceles: " + area);
+    }
+    /** Metodo static que devuelve el area de un triangulo escaleno por la formula de herón
+     *  @param semiperimetro  Suma de los lados dividida por 2
+     *  @param hipotenusa  Variable de tipo double que almacena el valor de la hipotenusa
+     *  @param cateto1  Variable de tipo double que almacena el valor del primer cateto
+     *  @param cateto2  Variable de tipo double que almacena el valor del segundo cateto
+     *  @return area  Muestra por pantalla el area del triangulo escaleno
+     */
+    public static void area_escaleno_heron(double hipotenusa, double cateto1, double cateto2) {
+        double semiperimetro = (cateto1 + cateto2 + hipotenusa)/2;
+        double area = Math.sqrt(semiperimetro*(semiperimetro-cateto1)*(semiperimetro-cateto2)*(semiperimetro-hipotenusa));
+        System.out.println("Area del triangulo escaleno: " + area);
+    }
+    /** Metodo static que devuelve el area de un triangulo rectangulo
+     * @param altura  Variable de tipo double que almacena el valor de la altura del triangulo
+     * @param base  Variable de tipo double que almacena el valor de la base del trangulo
+     * @return area  Muestra por pantalla el area del triangulo isosceles
+     */
+    public static void area_triangulo_general(double base, double altura) {
+        double area = (base*altura)/2;
+        System.out.println("Area del triangulo: " + area);
+    }
+    /** Metodo main, se comienza preguntando el tipo de triangulo del que se quiere calcular el area
+     * @param Tipo Variable char que posteriormente se utiliza para la seleccion del switch
+     */
+    public static void main(String[] args) {
+        System.out.println("¿De qué tipo es el triángulo del cual quieres saber el área?\n1.- Equilatero\n2.- Isosceles\n3.- Escaleno\n4.- Rectangulo  \n ");
+        Scanner sc = new Scanner(System.in);
+        char Tipo = sc.next().charAt(0);
+        switch (Tipo) {
+            case '1':
+                System.out.println("Introduce su altura:");
+                //Llamada al metodo area_equilatero
+                area_equilatero(sc.nextDouble());
+                break;
+            case '2':
+                System.out.println("Introduce su altura y su base:");
+                //Llamada al metodo area_isosceles
+                area_isosceles(sc.nextDouble(), sc.nextDouble());
+                break;
+            case '3':
+                System.out.println("Introduce su hipotenusa y sus dos catetos:");
+                //Llamada al metodo area_escaleno_heron
+                area_escaleno_heron(sc.nextDouble(), sc.nextDouble(), sc.nextDouble());
+                break;
+            case '4':
+                System.out.println("Introduce su base y su altura");
+                //Llamada al metodo area_triangulo_general
+                area_triangulo_general(sc.nextDouble(), sc.nextDouble());
+                break;
+            default:
+                //En caso de un error al introducir el string str se activa este default
+                System.out.println("Error al introducir el tipo de triangulo (¿Te has equivocado al escribir el numero?)");
+                break;
+        }
+    }
+}
